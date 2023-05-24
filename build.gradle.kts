@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.github"
-version = "1.0-SNAPSHOT"
+version = "latest"
 
 repositories {
     mavenCentral()
