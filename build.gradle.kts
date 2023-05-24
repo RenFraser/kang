@@ -5,6 +5,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
     id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
     application
+    idea
 }
 
 group = "io.github"
