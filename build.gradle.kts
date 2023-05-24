@@ -32,6 +32,10 @@ tasks.withType<Detekt>().configureEach {
     }
 }
 
+tasks.compileKotlin {
+    kotlinOptions.allWarningsAsErrors = true
+}
+
 dependencies {
     testImplementation(kotlin("test"))
 }
