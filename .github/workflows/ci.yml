@@ -59,4 +59,5 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{steps.tag-name.outputs.RELEASE_TAG_NAME}}
           files: ./build/distributions/kang-latest.zip
