@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm") version "1.8.21"
     id("io.gitlab.arturbosch.detekt") version "1.23.0"
     id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
+    jacoco
     application
     idea
 }
@@ -32,16 +33,33 @@ tasks.withType<Detekt>().configureEach {
     }
 }
 
-tasks.compileKotlin {
-    kotlinOptions.allWarningsAsErrors = true
-}
-
 dependencies {
     testImplementation(kotlin("test"))
 }
 
-tasks.test {
-    useJUnitPlatform()
+tasks {
+    test {
+        useJUnitPlatform()
+        finalizedBy(jacocoTestCoverageVerification, jacocoTestReport)
+    }
+
+    compileKotlin {
+        kotlinOptions.allWarningsAsErrors = true
+    }
+
+    jacocoTestReport {
+        dependsOn(test)
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = "0.9".toBigDecimal()
+                }
+            }
+        }
+    }
 }
 
 kotlin {
