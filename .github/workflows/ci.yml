@@ -46,6 +46,18 @@ jobs:
       - name: Build
         run: ./gradlew build
 
+      - name: Create tag name
+        id: tag-name
+        run: echo "RELEASE_TAG_NAME=`date +%s`" >> "$GITHUB_OUTPUT"
+
+      - name: Create new tag
+        run: git tag ${{steps.tag-name.outputs.RELEASE_TAG_NAME}}
+
+      - name: Push new tag
+        uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: ${{steps.tag-name.outputs.RELEASE_TAG_NAME}}
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
