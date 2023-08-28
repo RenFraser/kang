@@ -20,8 +20,8 @@ detekt {
     allRules = false // activate all available (even unstable) rules.
     buildUponDefaultConfig = true // preconfigure defaults
     parallel = true
-    config = files("$rootDir/detekt.yml")
-    source = files(projectDir)
+    config.setFrom(files("$rootDir/detekt.yml"))
+    source.setFrom(files(projectDir))
 }
 
 tasks.withType<Detekt>().configureEach {
