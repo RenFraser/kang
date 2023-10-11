@@ -3,7 +3,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 plugins {
     kotlin("jvm") version "1.9.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.1"
-    id("org.jlleitschuh.gradle.ktlint") version "11.6.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     jacoco
     application
     idea
