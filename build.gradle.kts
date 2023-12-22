@@ -16,6 +16,16 @@ repositories {
     mavenCentral()
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
+application {
+    application {
+        mainClass.set("org.kang.MainKt")
+    }
+}
+
 detekt {
     allRules = false // activate all available (even unstable) rules.
     buildUponDefaultConfig = true // preconfigure defaults
@@ -34,7 +44,9 @@ tasks.withType<Detekt>().configureEach {
 }
 
 dependencies {
+    implementation("org.eclipse.lsp4j:org.eclipse.lsp4j:0.21.1")
     testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 }
 
 tasks {
@@ -60,12 +72,4 @@ tasks {
             }
         }
     }
-}
-
-kotlin {
-    jvmToolchain(11)
-}
-
-application {
-    mainClass.set("MainKt")
 }
