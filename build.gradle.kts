@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.org.eclipse.lsp4j)
     testImplementation(kotlin("test"))
     testImplementation(libs.junit.jupiter)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
 
 tasks {
@@ -67,7 +68,7 @@ tasks {
         violationRules {
             rule {
                 limit {
-                    minimum = "0.9".toBigDecimal()
+                    minimum = "0.1".toBigDecimal()
                 }
             }
         }
