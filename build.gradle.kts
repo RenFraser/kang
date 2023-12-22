@@ -17,7 +17,7 @@ repositories {
 }
 
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(17)
 }
 
 application {
@@ -44,9 +44,9 @@ tasks.withType<Detekt>().configureEach {
 }
 
 dependencies {
-    implementation("org.eclipse.lsp4j:org.eclipse.lsp4j:0.21.1")
+    implementation(libs.org.eclipse.lsp4j)
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation(libs.junit.jupiter)
 }
 
 tasks {
