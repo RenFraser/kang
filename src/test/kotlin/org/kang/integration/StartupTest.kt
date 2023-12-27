@@ -1,6 +1,5 @@
 package org.kang.integration
 
-import org.kang.ServerLauncher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -10,6 +9,7 @@ import kotlinx.coroutines.test.runTest
 import org.eclipse.lsp4j.launch.LSPLauncher
 import org.junit.jupiter.api.Test
 import org.kang.KotlinLanguageClient
+import org.kang.ServerLauncher
 import java.net.ConnectException
 import java.net.Socket
 
