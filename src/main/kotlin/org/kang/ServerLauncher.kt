@@ -1,6 +1,7 @@
+package org.kang
+
 import org.eclipse.lsp4j.launch.LSPLauncher
 import org.eclipse.lsp4j.services.LanguageClient
-import org.kang.KotlinLanguageServer
 import java.net.ServerSocket
 
 private const val PORT = 64355

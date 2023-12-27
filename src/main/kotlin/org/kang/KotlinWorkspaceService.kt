@@ -1,3 +1,5 @@
+package org.kang
+
 import org.eclipse.lsp4j.DidChangeConfigurationParams
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams
 import org.eclipse.lsp4j.services.LanguageClient

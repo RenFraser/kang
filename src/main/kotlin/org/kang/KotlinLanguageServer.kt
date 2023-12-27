@@ -1,7 +1,5 @@
 package org.kang
 
-import KotlinTextDocumentService
-import KotlinWorkspaceService
 import org.eclipse.lsp4j.ClientCapabilities
 import org.eclipse.lsp4j.CompletionOptions
 import org.eclipse.lsp4j.InitializeParams
