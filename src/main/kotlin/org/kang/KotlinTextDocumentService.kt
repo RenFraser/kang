@@ -48,6 +48,8 @@ import org.eclipse.lsp4j.LinkedEditingRangeParams
 import org.eclipse.lsp4j.LinkedEditingRanges
 import org.eclipse.lsp4j.Location
 import org.eclipse.lsp4j.LocationLink
+import org.eclipse.lsp4j.MarkupContent
+import org.eclipse.lsp4j.MarkupKind
 import org.eclipse.lsp4j.Moniker
 import org.eclipse.lsp4j.MonikerParams
 import org.eclipse.lsp4j.PrepareRenameDefaultBehavior
@@ -102,7 +104,13 @@ class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
     }
 
     override fun hover(params: HoverParams?): CompletableFuture<Hover> {
-        return super.hover(params)
+        val content = MarkupContent().apply {
+            kind = MarkupKind.PLAINTEXT
+            value = "test!"
+        }
+
+        val hover = Hover(content)
+        return CompletableFuture.supplyAsync { hover }
     }
 
     override fun signatureHelp(params: SignatureHelpParams?): CompletableFuture<SignatureHelp> {

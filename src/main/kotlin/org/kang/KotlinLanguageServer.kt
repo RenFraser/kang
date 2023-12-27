@@ -1,11 +1,11 @@
 package org.kang
 
 import org.eclipse.lsp4j.ClientCapabilities
-import org.eclipse.lsp4j.CompletionOptions
 import org.eclipse.lsp4j.InitializeParams
 import org.eclipse.lsp4j.InitializeResult
 import org.eclipse.lsp4j.ServerCapabilities
 import org.eclipse.lsp4j.TextDocumentSyncKind
+import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.lsp4j.services.LanguageClientAware
 import org.eclipse.lsp4j.services.LanguageServer
@@ -24,24 +24,16 @@ class KotlinLanguageServer : LanguageServer, LanguageClientAware {
     override fun initialize(params: InitializeParams?): CompletableFuture<InitializeResult> {
         requireNotNull(params)
 
-        val response = InitializeResult(ServerCapabilities())
+        val serverCapabilities = ServerCapabilities().apply {
+            hoverProvider = Either.forLeft(true)
+        }
+
+        val response = InitializeResult(serverCapabilities)
 
         // Set the document synchronization capabilities to full.
         response.capabilities.setTextDocumentSync(TextDocumentSyncKind.Full)
         this.clientCapabilities = checkNotNull(params.capabilities)
 
-        // Check if dynamic registration of completion capability is allowed by the client.
-        // If so we don't register the capability.
-        // Else, we register the completion capability.
-        val isDynamicCompletionRegistration = params.capabilities
-            ?.textDocument
-            ?.completion
-            ?.dynamicRegistration
-            ?: false
-
-        if (!isDynamicCompletionRegistration) {
-            response.capabilities.completionProvider = CompletionOptions()
-        }
         return CompletableFuture.supplyAsync { response }
     }
 
