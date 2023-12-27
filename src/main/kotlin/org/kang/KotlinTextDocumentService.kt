@@ -1,6 +1,5 @@
 package org.kang
 
-import java.util.concurrent.CompletableFuture
 import org.eclipse.lsp4j.CallHierarchyIncomingCall
 import org.eclipse.lsp4j.CallHierarchyIncomingCallsParams
 import org.eclipse.lsp4j.CallHierarchyItem
@@ -81,7 +80,9 @@ import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.lsp4j.services.LanguageClientAware
 import org.eclipse.lsp4j.services.TextDocumentService
 import org.slf4j.LoggerFactory
+import java.util.concurrent.CompletableFuture
 
+@Suppress("TooManyFunctions")
 class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
     override fun didOpen(p0: DidOpenTextDocumentParams?) {
         LOGGER.info("opened text document")
@@ -91,7 +92,8 @@ class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
         LOGGER.info("changed text document")
     }
 
-    override fun completion(position: CompletionParams?): CompletableFuture<Either<MutableList<CompletionItem>, CompletionList>> {
+    override fun completion(position: CompletionParams?):
+        CompletableFuture<Either<MutableList<CompletionItem>, CompletionList>> {
         return super.completion(position)
     }
 
@@ -107,19 +109,23 @@ class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
         return super.signatureHelp(params)
     }
 
-    override fun declaration(params: DeclarationParams?): CompletableFuture<Either<MutableList<out Location>, MutableList<out LocationLink>>> {
+    override fun declaration(params: DeclarationParams?):
+        CompletableFuture<Either<MutableList<out Location>, MutableList<out LocationLink>>> {
         return super.declaration(params)
     }
 
-    override fun definition(params: DefinitionParams?): CompletableFuture<Either<MutableList<out Location>, MutableList<out LocationLink>>> {
+    override fun definition(params: DefinitionParams?):
+        CompletableFuture<Either<MutableList<out Location>, MutableList<out LocationLink>>> {
         return super.definition(params)
     }
 
-    override fun typeDefinition(params: TypeDefinitionParams?): CompletableFuture<Either<MutableList<out Location>, MutableList<out LocationLink>>> {
+    override fun typeDefinition(params: TypeDefinitionParams?):
+        CompletableFuture<Either<MutableList<out Location>, MutableList<out LocationLink>>> {
         return super.typeDefinition(params)
     }
 
-    override fun implementation(params: ImplementationParams?): CompletableFuture<Either<MutableList<out Location>, MutableList<out LocationLink>>> {
+    override fun implementation(params: ImplementationParams?):
+        CompletableFuture<Either<MutableList<out Location>, MutableList<out LocationLink>>> {
         return super.implementation(params)
     }
 
@@ -127,11 +133,13 @@ class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
         return super.references(params)
     }
 
-    override fun documentHighlight(params: DocumentHighlightParams?): CompletableFuture<MutableList<out DocumentHighlight>> {
+    override fun documentHighlight(params: DocumentHighlightParams?):
+        CompletableFuture<MutableList<out DocumentHighlight>> {
         return super.documentHighlight(params)
     }
 
-    override fun documentSymbol(params: DocumentSymbolParams?): CompletableFuture<MutableList<Either<SymbolInformation, DocumentSymbol>>> {
+    override fun documentSymbol(params: DocumentSymbolParams?):
+        CompletableFuture<MutableList<Either<SymbolInformation, DocumentSymbol>>> {
         return super.documentSymbol(params)
     }
 
@@ -155,11 +163,13 @@ class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
         return super.formatting(params)
     }
 
-    override fun rangeFormatting(params: DocumentRangeFormattingParams?): CompletableFuture<MutableList<out TextEdit>> {
+    override fun rangeFormatting(params: DocumentRangeFormattingParams?):
+        CompletableFuture<MutableList<out TextEdit>> {
         return super.rangeFormatting(params)
     }
 
-    override fun onTypeFormatting(params: DocumentOnTypeFormattingParams?): CompletableFuture<MutableList<out TextEdit>> {
+    override fun onTypeFormatting(params: DocumentOnTypeFormattingParams?):
+        CompletableFuture<MutableList<out TextEdit>> {
         return super.onTypeFormatting(params)
     }
 
@@ -191,7 +201,8 @@ class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
         return super.documentColor(params)
     }
 
-    override fun colorPresentation(params: ColorPresentationParams?): CompletableFuture<MutableList<ColorPresentation>> {
+    override fun colorPresentation(params: ColorPresentationParams?):
+        CompletableFuture<MutableList<ColorPresentation>> {
         return super.colorPresentation(params)
     }
 
@@ -199,31 +210,38 @@ class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
         return super.foldingRange(params)
     }
 
-    override fun prepareRename(params: PrepareRenameParams?): CompletableFuture<Either3<Range, PrepareRenameResult, PrepareRenameDefaultBehavior>> {
+    override fun prepareRename(params: PrepareRenameParams?):
+        CompletableFuture<Either3<Range, PrepareRenameResult, PrepareRenameDefaultBehavior>> {
         return super.prepareRename(params)
     }
 
-    override fun prepareTypeHierarchy(params: TypeHierarchyPrepareParams?): CompletableFuture<MutableList<TypeHierarchyItem>> {
+    override fun prepareTypeHierarchy(params: TypeHierarchyPrepareParams?):
+        CompletableFuture<MutableList<TypeHierarchyItem>> {
         return super.prepareTypeHierarchy(params)
     }
 
-    override fun typeHierarchySupertypes(params: TypeHierarchySupertypesParams?): CompletableFuture<MutableList<TypeHierarchyItem>> {
+    override fun typeHierarchySupertypes(params: TypeHierarchySupertypesParams?):
+        CompletableFuture<MutableList<TypeHierarchyItem>> {
         return super.typeHierarchySupertypes(params)
     }
 
-    override fun typeHierarchySubtypes(params: TypeHierarchySubtypesParams?): CompletableFuture<MutableList<TypeHierarchyItem>> {
+    override fun typeHierarchySubtypes(params: TypeHierarchySubtypesParams?):
+        CompletableFuture<MutableList<TypeHierarchyItem>> {
         return super.typeHierarchySubtypes(params)
     }
 
-    override fun prepareCallHierarchy(params: CallHierarchyPrepareParams?): CompletableFuture<MutableList<CallHierarchyItem>> {
+    override fun prepareCallHierarchy(params: CallHierarchyPrepareParams?):
+        CompletableFuture<MutableList<CallHierarchyItem>> {
         return super.prepareCallHierarchy(params)
     }
 
-    override fun callHierarchyIncomingCalls(params: CallHierarchyIncomingCallsParams?): CompletableFuture<MutableList<CallHierarchyIncomingCall>> {
+    override fun callHierarchyIncomingCalls(params: CallHierarchyIncomingCallsParams?):
+        CompletableFuture<MutableList<CallHierarchyIncomingCall>> {
         return super.callHierarchyIncomingCalls(params)
     }
 
-    override fun callHierarchyOutgoingCalls(params: CallHierarchyOutgoingCallsParams?): CompletableFuture<MutableList<CallHierarchyOutgoingCall>> {
+    override fun callHierarchyOutgoingCalls(params: CallHierarchyOutgoingCallsParams?):
+        CompletableFuture<MutableList<CallHierarchyOutgoingCall>> {
         return super.callHierarchyOutgoingCalls(params)
     }
 
@@ -235,7 +253,8 @@ class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
         return super.semanticTokensFull(params)
     }
 
-    override fun semanticTokensFullDelta(params: SemanticTokensDeltaParams?): CompletableFuture<Either<SemanticTokens, SemanticTokensDelta>> {
+    override fun semanticTokensFullDelta(params: SemanticTokensDeltaParams?):
+        CompletableFuture<Either<SemanticTokens, SemanticTokensDelta>> {
         return super.semanticTokensFullDelta(params)
     }
 

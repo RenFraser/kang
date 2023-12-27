@@ -1,6 +1,5 @@
 package org.kang
 
-import java.util.concurrent.CompletableFuture
 import org.eclipse.lsp4j.CreateFilesParams
 import org.eclipse.lsp4j.DeleteFilesParams
 import org.eclipse.lsp4j.DidChangeConfigurationParams
@@ -19,13 +18,16 @@ import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.lsp4j.services.LanguageClientAware
 import org.eclipse.lsp4j.services.WorkspaceService
 import org.slf4j.LoggerFactory
+import java.util.concurrent.CompletableFuture
 
+@Suppress("TooManyFunctions")
 class KotlinWorkspaceService : WorkspaceService, LanguageClientAware {
     override fun executeCommand(params: ExecuteCommandParams?): CompletableFuture<Any> {
         return super.executeCommand(params)
     }
 
-    override fun symbol(params: WorkspaceSymbolParams?): CompletableFuture<Either<MutableList<out SymbolInformation>, MutableList<out WorkspaceSymbol>>> {
+    override fun symbol(params: WorkspaceSymbolParams?):
+        CompletableFuture<Either<MutableList<out SymbolInformation>, MutableList<out WorkspaceSymbol>>> {
         return super.symbol(params)
     }
 
