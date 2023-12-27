@@ -45,6 +45,8 @@ tasks.withType<Detekt>().configureEach {
 
 dependencies {
     implementation(libs.org.eclipse.lsp4j)
+    implementation(libs.slf4j.api)
+    implementation(libs.log4j.slf4j2.impl)
     testImplementation(kotlin("test"))
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.kotlinx.coroutines.test)

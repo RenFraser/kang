@@ -7,25 +7,30 @@ import org.eclipse.lsp4j.DidSaveTextDocumentParams
 import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.lsp4j.services.LanguageClientAware
 import org.eclipse.lsp4j.services.TextDocumentService
+import org.slf4j.LoggerFactory
 
 class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
     override fun didOpen(p0: DidOpenTextDocumentParams?) {
-        println("opened text document")
+        LOGGER.info("opened text document")
     }
 
     override fun didChange(p0: DidChangeTextDocumentParams?) {
-        println("changed text document")
+        LOGGER.info("changed text document")
     }
 
     override fun didClose(p0: DidCloseTextDocumentParams?) {
-        println("changed closed text document")
+        LOGGER.info("changed closed text document")
     }
 
     override fun didSave(p0: DidSaveTextDocumentParams?) {
-        println("saved text document")
+        LOGGER.info("saved text document")
     }
 
     override fun connect(p0: LanguageClient?) {
-        println("connected!")
+        LOGGER.info("connected!")
+    }
+
+    companion object {
+        private val LOGGER = LoggerFactory.getLogger(KotlinTextDocumentService::class.java)
     }
 }

@@ -10,6 +10,8 @@ import org.eclipse.lsp4j.launch.LSPLauncher
 import org.junit.jupiter.api.Test
 import org.kang.KotlinLanguageClient
 import org.kang.ServerLauncher
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.net.ConnectException
 import java.net.Socket
 
@@ -28,7 +30,7 @@ class StartupTest {
 
                 while (true) {
                     try {
-                        println("attempting to connect")
+                        LOGGER.info("attempting to connect")
                         val socket = Socket("localhost", 64355)
                         LSPLauncher.createClientLauncher(client, socket.getInputStream(), socket.getOutputStream())
 
@@ -36,7 +38,7 @@ class StartupTest {
                             return@async
                         }
                     } catch (e: ConnectException) {
-                        println("caught connection exception")
+                        LOGGER.info("caught connection exception")
                         if (attempts >= 5) {
                             throw e
                         }
@@ -50,5 +52,9 @@ class StartupTest {
             val tasks = listOf(first, second)
             tasks.joinAll()
         }
+    }
+
+    companion object {
+        private val LOGGER: Logger = LoggerFactory.getLogger(StartupTest::class.java)
     }
 }
