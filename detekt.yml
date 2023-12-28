@@ -1,3 +1,6 @@
 ---
 config:
   warningsAsErrors: true
+style:
+  ForbiddenComment: # Removes TODO, FIXME, STOPSHIP defaults
+    active: false
