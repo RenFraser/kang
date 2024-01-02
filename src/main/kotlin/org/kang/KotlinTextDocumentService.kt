@@ -85,7 +85,9 @@ import org.slf4j.LoggerFactory
 import java.util.concurrent.CompletableFuture
 
 @Suppress("TooManyFunctions")
-class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
+class KotlinTextDocumentService(
+    private val kotlinLanguageServer: KotlinLanguageServer
+) : TextDocumentService, LanguageClientAware {
     override fun didOpen(p0: DidOpenTextDocumentParams?) {
         LOGGER.info("opened text document")
     }
@@ -104,6 +106,10 @@ class KotlinTextDocumentService : TextDocumentService, LanguageClientAware {
     }
 
     override fun hover(params: HoverParams?): CompletableFuture<Hover> {
+        // TODO: remove - just here to keep the build green.
+        val sourceFiles = this.kotlinLanguageServer.environment.getSourceFiles()
+        LOGGER.info(sourceFiles.toString())
+
         val content = MarkupContent().apply {
             kind = MarkupKind.PLAINTEXT
             value = "test!"

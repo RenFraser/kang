@@ -21,7 +21,9 @@ import org.slf4j.LoggerFactory
 import java.util.concurrent.CompletableFuture
 
 @Suppress("TooManyFunctions")
-class KotlinWorkspaceService : WorkspaceService, LanguageClientAware {
+class KotlinWorkspaceService(
+    private val kotlinLanguageServer: KotlinLanguageServer
+) : WorkspaceService, LanguageClientAware {
     override fun executeCommand(params: ExecuteCommandParams?): CompletableFuture<Any> {
         return super.executeCommand(params)
     }
@@ -72,6 +74,9 @@ class KotlinWorkspaceService : WorkspaceService, LanguageClientAware {
     }
 
     override fun diagnostic(params: WorkspaceDiagnosticParams?): CompletableFuture<WorkspaceDiagnosticReport> {
+        // TODO: remove - just here to keep the build green.
+        val sourceFiles = this.kotlinLanguageServer.environment.getSourceFiles()
+        LOGGER.info(sourceFiles.toString())
         return super.diagnostic(params)
     }
 

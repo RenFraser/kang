@@ -11,18 +11,43 @@ import org.eclipse.lsp4j.services.LanguageClientAware
 import org.eclipse.lsp4j.services.LanguageServer
 import org.eclipse.lsp4j.services.TextDocumentService
 import org.eclipse.lsp4j.services.WorkspaceService
+import org.jetbrains.dokka.DokkaSourceSetID
+import org.jetbrains.dokka.DokkaSourceSetImpl
+import org.jetbrains.dokka.analysis.DokkaResolutionFacade
+import org.jetbrains.dokka.analysis.KotlinAnalysis
+import org.jetbrains.dokka.utilities.DokkaConsoleLogger
+import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
+import java.io.File
+import java.net.URI
 import java.util.concurrent.CompletableFuture
 import kotlin.system.exitProcess
 
 class KotlinLanguageServer : LanguageServer, LanguageClientAware {
 
     private lateinit var client: LanguageClient
-    private val workspaceService = KotlinWorkspaceService()
-    private val textDocumentService = KotlinTextDocumentService()
+    private val workspaceService = KotlinWorkspaceService(this)
+    private val textDocumentService = KotlinTextDocumentService(this)
     private lateinit var clientCapabilities: ClientCapabilities
+    lateinit var environment: KotlinCoreEnvironment
+    lateinit var facade: DokkaResolutionFacade
 
     override fun initialize(params: InitializeParams?): CompletableFuture<InitializeResult> {
         requireNotNull(params)
+
+        // Copied from: https://medium.com/virtuslab/analyzing-kotlin-sources-just-got-simpler-48aa88e0cf0b
+        // We only account for a single workspace directory.
+        // If we need to work with multiple directories, change below.
+        val roots = setOf(File(URI(params.workspaceFolders.first().uri)))
+        val sourceset = DokkaSourceSetImpl(
+            displayName = "kang",
+            sourceSetID = DokkaSourceSetID("kangScopeID", "kangJVM"),
+            sourceRoots = roots
+        )
+        val kotlinAnalysis = KotlinAnalysis(listOf(sourceset), DokkaConsoleLogger)
+        val (environment, facade) = kotlinAnalysis[sourceset]
+
+        this.environment = environment
+        this.facade = facade
 
         val serverCapabilities = ServerCapabilities().apply {
             hoverProvider = Either.forLeft(true)
