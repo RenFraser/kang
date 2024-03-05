@@ -11,7 +11,7 @@ dependencyResolutionManagement {
             library("slf4j-api", "org.slf4j:slf4j-api:2.0.10")
             library("log4j-slf4j2-impl", "org.apache.logging.log4j:log4j-slf4j2-impl:2.22.1")
             library("dokka-analysis", "org.jetbrains.dokka:dokka-analysis:1.4.10.2")
-            library("dokka-core", "org.jetbrains.dokka:dokka-core:1.4.10.2")
+            library("dokka-core", "org.jetbrains.dokka:dokka-core:1.9.20")
         }
     }
 }
